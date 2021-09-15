@@ -45,18 +45,18 @@ function() {
 document.getElementById("show-books-button").addEventListener("click",
 function showBooksClick() {
     console.log("show-books clicked")
-    let booksContainer = document.getElementsByClassName("books-container")
-    while (booksContainer.length > 0) {
+    let booksContainer = document.getElementById("books-container")
+    while (booksContainer.innerText !== '') {
 
-        booksContainer[0].remove()
+        booksContainer.innerText = ''
     }
 
     i = 0
 
     let deleteBookButton
-    booksContainer = document.createElement("div")
-    booksContainer.setAttribute("class", "books-container")
+    booksContainer = document.getElementById("books-container")
 
+    
 
     while (i < myLibrary.length) {
 
@@ -66,22 +66,28 @@ function showBooksClick() {
 
         bookDiv.innerHTML = myLibrary[i].title + ", by " + myLibrary[i].author
         deleteBookButton = document.createElement("button")
-        deleteBookButton.setAttribute("class", "delete-book-button")
-        deleteBookButton.setAttribute("id", i + "-delete")
-        deleteBookButton.innerHTML = "Delete"
-        deleteBookButton.bookId = i
+            deleteBookButton.setAttribute("class", "delete-book-button")
+            deleteBookButton.setAttribute("id", i + "-delete")
+            deleteBookButton.innerHTML = "Delete"
+            deleteBookButton.bookId = i
 
-        deleteBookButton.addEventListener("click",
-        function() {
-            console.log("Books: " + myLibrary.length + ". delete clicked on" + this.id + ", " + myLibrary[this.id[0]].title)
-            bookToDelete = this.book
-            myLibrary.splice(this.id[0], 1)
-            console.log("after deletion, books:" + myLibrary.length)
-            showBooksClick()
-                })
+            deleteBookButton.addEventListener("click",
+            function() {
+                console.log("Books: " + myLibrary.length + ". delete clicked on" + this.id + ", " + myLibrary[this.id[0]].title)
+                myLibrary.splice(this.id[0], 1)
+                console.log("after deletion, books:" + myLibrary.length)
+                showBooksClick()
+                    })
 
 
-        bookDiv.appendChild(deleteBookButton)
+            bookDiv.appendChild(deleteBookButton)
+
+
+        readCheckbox = document.createElement("input")
+            readCheckbox.setAttribute("type", "checkbox")
+            bookDiv.appendChild(readCheckbox)
+
+
 
         booksContainer.appendChild(bookDiv)
 
