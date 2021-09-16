@@ -45,26 +45,29 @@ document.getElementById("show-books-button").addEventListener("click",
 function showBooksClick() {
     console.log("show-books clicked")
     let booksContainer = document.getElementById("books-container")
-    while (booksContainer.innerText !== '') {
+    let booksTable = document.getElementById("books-table")
 
-        booksContainer.innerText = ''
+    while (booksTable.rows.length > 1) {
+        console.log("bookstable rowlength:"+booksTable.rows.length)
+        booksTable.deleteRow(1)
     }
 
     i = 0
 
     let deleteBookButton
-    booksContainer = document.getElementById("books-container")
 
-    
-
+    let row
     while (i < myLibrary.length) {
+        row = booksTable.insertRow(i+1)
+            titleCell = row.insertCell(0)
+                titleCell.innerHTML = myLibrary[i].title
+            authorCell = row.insertCell(1)
+                authorCell.innerHTML = myLibrary[i].author
+            deleteCell = row.insertCell(2)
 
-        bookDiv = document.createElement("div")
-            bookDiv.setAttribute("class", "book-div")
-            bookDiv.setAttribute("id", "book-div" + i)
-            booksContainer.appendChild(bookDiv)
+            isReadCell = row.insertCell(3)
 
-        bookDiv.innerHTML = myLibrary[i].title + ", by " + myLibrary[i].author
+
         deleteBookButton = document.createElement("button")
             deleteBookButton.setAttribute("class", "delete-book-button")
             deleteBookButton.setAttribute("id", i + "-delete")
@@ -80,13 +83,14 @@ function showBooksClick() {
                     })
 
 
-            bookDiv.appendChild(deleteBookButton)
+                deleteCell.appendChild(deleteBookButton)
 
 
         readCheckbox = document.createElement("input")
             readCheckbox.setAttribute("type", "checkbox")
             readCheckbox.setAttribute("id", i +"-checkbox")
-            bookDiv.appendChild(readCheckbox)
+
+            isReadCell.appendChild(readCheckbox)
 
             if (myLibrary[i].isRead) {
                 document.getElementById(i + "-checkbox").checked = true;
@@ -106,7 +110,6 @@ function showBooksClick() {
 
                 }
                 })
-
 
 
         i++
