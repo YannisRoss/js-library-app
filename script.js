@@ -2,9 +2,9 @@ let myLibrary = []
 
 class Book {
 
-    constructor() {
-      this.title = prompt("What is the book called?", "Title")
-      this.author = prompt("Who is the book's author?", "Author's name")
+    constructor(title, author) {
+      this.title = title
+      this.author = author
       this.isRead = false
     }
   
@@ -35,8 +35,14 @@ function showBooks() {
 document.getElementById("new-book-button").addEventListener("click",
 function() {
     let newBook
-    newBook = new Book
+    let bookTitleField = document.getElementById('book-title-input')
+    let bookAuthorField = document.getElementById('book-author-input')
+
+    newBook = new Book(bookTitleField.value, bookAuthorField.value)
     newBook.addToLibrary()
+
+    bookTitleField.value = ''
+    bookAuthorField.value = ''
 })
 
 document.getElementById("show-books-button").addEventListener("click",
