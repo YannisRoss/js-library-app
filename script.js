@@ -38,11 +38,15 @@ function() {
     let bookTitleField = document.getElementById('book-title-input')
     let bookAuthorField = document.getElementById('book-author-input')
 
-    newBook = new Book(bookTitleField.value, bookAuthorField.value)
-    newBook.addToLibrary()
+    if (bookTitleField.checkValidity() &&  bookAuthorField.checkValidity() ) {
+        newBook = new Book(bookTitleField.value, bookAuthorField.value)
+        newBook.addToLibrary()
 
-    bookTitleField.value = ''
-    bookAuthorField.value = ''
+        bookTitleField.value = ''
+        bookAuthorField.value = ''
+
+    }
+    else { alert('invalid input!')}
 })
 
 document.getElementById("show-books-button").addEventListener("click",
