@@ -108,6 +108,8 @@ function showBooksClick() {
                 console.log("Books: " + myLibrary.length + ". delete clicked on" + this.id + ", " + myLibrary[this.id[0]].title)
                 myLibrary.splice(this.id[0], 1)
                 console.log("after deletion, books:" + myLibrary.length)
+                localStorage.setItem("myLibrary", JSON.stringify(myLibrary));
+
                 showBooksClick()
                     })
 
