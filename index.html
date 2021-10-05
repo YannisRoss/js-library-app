@@ -9,14 +9,14 @@
 <body>
 
 
-<form>
+<form id="form">
     <label for="book-title-input">Book title</label>
     <input id="book-title-input" name="book-title" required minlength="1">
 
     <label for="book-author-input">Author's name</label>
     <input id="book-author-input" name="book-author" required minlength="1">
 
-    <button type="button" id="new-book-button"> New Book </button>
+    <button type="submit" id="new-book-button" onsubmit="return false"> New Book </button>
 </form>
 
 

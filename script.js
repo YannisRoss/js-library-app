@@ -1,4 +1,9 @@
-let myLibrary = []
+let myLibrary = JSON.parse(localStorage.getItem('myLibrary'))
+
+if (myLibrary == null) {
+    myLibrary = []
+}
+
 
 class Book {
 
@@ -11,7 +16,7 @@ class Book {
     addToLibrary() {
 
         myLibrary.push(this)
-    
+        localStorage.setItem("myLibrary", JSON.stringify(myLibrary));
     
     }
   }
@@ -31,12 +36,19 @@ function showBooks() {
 
 }
 
+let bookTitleField = document.getElementById('book-title-input')
+let bookAuthorField = document.getElementById('book-author-input')
 
-document.getElementById("new-book-button").addEventListener("click",
-function() {
+bookTitleField.addEventListener("input", function (event) {
+   
+})
+
+document.getElementById("form").addEventListener("submit",
+function(event) {
+    event.preventDefault()
     let newBook
-    let bookTitleField = document.getElementById('book-title-input')
-    let bookAuthorField = document.getElementById('book-author-input')
+
+    
 
     if (bookTitleField.checkValidity() &&  bookAuthorField.checkValidity() ) {
         newBook = new Book(bookTitleField.value, bookAuthorField.value)
@@ -46,7 +58,16 @@ function() {
         bookAuthorField.value = ''
 
     }
-    else { alert('invalid input!')}
+    else {
+        console.log('book rejected')
+        if (bookTitleField.validity.valueMissing) {
+            console.log('tooo shortz')
+    
+            bookTitleField.setCustomValidity("The book needs a title!");
+        } else {
+            bookTitleField.setCustomValidity("");
+        }
+    }
 })
 
 document.getElementById("show-books-button").addEventListener("click",
